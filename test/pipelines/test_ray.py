@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-import ray
+# import ray
 
 from haystack.pipelines import RayPipeline
 

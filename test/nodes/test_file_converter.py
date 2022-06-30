@@ -10,14 +10,16 @@ from haystack.nodes import (
     DocxToTextConverter,
     PDFToTextConverter,
     PDFToTextOCRConverter,
-    TikaConverter,
-    AzureConverter,
+    # TikaConverter,
+    # AzureConverter,
     ParsrConverter,
     TextConverter,
 )
 
 from ..conftest import SAMPLES_PATH
 
+TikaConverter=None
+AzureConverter=None
 
 @pytest.mark.tika
 @pytest.mark.parametrize("Converter", [PDFToTextConverter, TikaConverter, PDFToTextOCRConverter])

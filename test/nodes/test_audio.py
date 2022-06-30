@@ -1,7 +1,8 @@
 import os
 
 import numpy as np
-import soundfile as sf
+# import soundfile as sf
+sf=None
 
 from haystack.schema import Span, Answer, SpeechAnswer, Document, SpeechDocument
 from haystack.nodes.audio import AnswerToSpeech, DocumentToSpeech

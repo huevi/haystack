@@ -14,10 +14,10 @@ from haystack.nodes.file_converter import (
     MarkdownConverter,
     PDFToTextConverter,
     PDFToTextOCRConverter,
-    TikaConverter,
-    TikaXHTMLParser,
+    # TikaConverter,
+    # TikaXHTMLParser,
     TextConverter,
-    AzureConverter,
+    # AzureConverter,
     ParsrConverter,
 )
 from haystack.nodes.label_generator import PseudoLabelGenerator

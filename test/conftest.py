@@ -30,16 +30,16 @@ try:
     milvus1 = True
 except ImportError:
     milvus1 = False
-    from pymilvus import utility
+    # from pymilvus import utility
 
 try:
     from elasticsearch import Elasticsearch
     from haystack.document_stores.elasticsearch import ElasticsearchDocumentStore
-    import weaviate
-    from haystack.document_stores.weaviate import WeaviateDocumentStore
-    from haystack.document_stores import MilvusDocumentStore, PineconeDocumentStore
-    from haystack.document_stores.graphdb import GraphDBKnowledgeGraph
-    from haystack.document_stores.faiss import FAISSDocumentStore
+    # import weaviate
+    # from haystack.document_stores.weaviate import WeaviateDocumentStore
+    # from haystack.document_stores import MilvusDocumentStore, PineconeDocumentStore
+    # from haystack.document_stores.graphdb import GraphDBKnowledgeGraph
+    # from haystack.document_stores.faiss import FAISSDocumentStore
     from haystack.document_stores.sql import SQLDocumentStore
 
 except (ImportError, ModuleNotFoundError) as ie:
