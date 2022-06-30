@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import logging
 from pathlib import Path
 from typing import Any, Dict, Union
-import mlflow
+# import mlflow
 from requests.exceptions import ConnectionError
 
 from haystack.environment import get_or_create_env_meta_data
@@ -132,57 +132,57 @@ class StdoutTrackingHead(BaseTrackingHead):
         logger.info(f"**** End of Experiment **** ")
 
 
-class MLflowTrackingHead(BaseTrackingHead):
-    def __init__(self, tracking_uri: str, auto_track_environment: bool = True) -> None:
-        """
-        Experiment tracking head for MLflow.
-        """
-        super().__init__()
-        self.tracking_uri = tracking_uri
-        self.auto_track_environment = auto_track_environment
+# class MLflowTrackingHead(BaseTrackingHead):
+#     def __init__(self, tracking_uri: str, auto_track_environment: bool = True) -> None:
+#         """
+#         Experiment tracking head for MLflow.
+#         """
+#         super().__init__()
+#         self.tracking_uri = tracking_uri
+#         self.auto_track_environment = auto_track_environment
 
-    def init_experiment(
-        self, experiment_name: str, run_name: str = None, tags: Dict[str, Any] = None, nested: bool = False
-    ):
-        try:
-            mlflow.set_tracking_uri(self.tracking_uri)
-            mlflow.set_experiment(experiment_name)
-            mlflow.start_run(run_name=run_name, nested=nested, tags=tags)
-            logger.info(f"Tracking run {run_name} of experiment {experiment_name} by mlflow under {self.tracking_uri}")
-            if self.auto_track_environment:
-                mlflow.log_params(flatten_dict({"environment": get_or_create_env_meta_data()}))
-        except ConnectionError:
-            raise Exception(
-                f"MLflow cannot connect to the remote server at {self.tracking_uri}.\n"
-                f"MLflow also supports logging runs locally to files. Set the MLflowTrackingHead "
-                f"tracking_uri to an empty string to use that."
-            )
+#     def init_experiment(
+#         self, experiment_name: str, run_name: str = None, tags: Dict[str, Any] = None, nested: bool = False
+#     ):
+#         try:
+#             mlflow.set_tracking_uri(self.tracking_uri)
+#             mlflow.set_experiment(experiment_name)
+#             mlflow.start_run(run_name=run_name, nested=nested, tags=tags)
+#             logger.info(f"Tracking run {run_name} of experiment {experiment_name} by mlflow under {self.tracking_uri}")
+#             if self.auto_track_environment:
+#                 mlflow.log_params(flatten_dict({"environment": get_or_create_env_meta_data()}))
+#         except ConnectionError:
+#             raise Exception(
+#                 f"MLflow cannot connect to the remote server at {self.tracking_uri}.\n"
+#                 f"MLflow also supports logging runs locally to files. Set the MLflowTrackingHead "
+#                 f"tracking_uri to an empty string to use that."
+#             )
 
-    def track_metrics(self, metrics: Dict[str, Any], step: int):
-        try:
-            metrics = flatten_dict(metrics)
-            mlflow.log_metrics(metrics, step=step)
-        except ConnectionError:
-            logger.warning(f"ConnectionError in logging metrics to MLflow.")
-        except Exception as e:
-            logger.warning(f"Failed to log metrics: {e}")
+#     def track_metrics(self, metrics: Dict[str, Any], step: int):
+#         try:
+#             metrics = flatten_dict(metrics)
+#             mlflow.log_metrics(metrics, step=step)
+#         except ConnectionError:
+#             logger.warning(f"ConnectionError in logging metrics to MLflow.")
+#         except Exception as e:
+#             logger.warning(f"Failed to log metrics: {e}")
 
-    def track_params(self, params: Dict[str, Any]):
-        try:
-            params = flatten_dict(params)
-            mlflow.log_params(params)
-        except ConnectionError:
-            logger.warning("ConnectionError in logging params to MLflow")
-        except Exception as e:
-            logger.warning(f"Failed to log params: {e}")
+#     def track_params(self, params: Dict[str, Any]):
+#         try:
+#             params = flatten_dict(params)
+#             mlflow.log_params(params)
+#         except ConnectionError:
+#             logger.warning("ConnectionError in logging params to MLflow")
+#         except Exception as e:
+#             logger.warning(f"Failed to log params: {e}")
 
-    def track_artifacts(self, dir_path: Union[str, Path], artifact_path: str = None):
-        try:
-            mlflow.log_artifacts(dir_path, artifact_path)
-        except ConnectionError:
-            logger.warning(f"ConnectionError in logging artifacts to MLflow")
-        except Exception as e:
-            logger.warning(f"Failed to log artifacts: {e}")
+#     def track_artifacts(self, dir_path: Union[str, Path], artifact_path: str = None):
+#         try:
+#             mlflow.log_artifacts(dir_path, artifact_path)
+#         except ConnectionError:
+#             logger.warning(f"ConnectionError in logging artifacts to MLflow")
+#         except Exception as e:
+#             logger.warning(f"Failed to log artifacts: {e}")
 
-    def end_run(self):
-        mlflow.end_run()
+#     def end_run(self):
+#         mlflow.end_run()

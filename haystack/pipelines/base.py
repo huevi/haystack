@@ -47,7 +47,7 @@ from haystack.nodes.base import BaseComponent, RootNode
 from haystack.nodes.retriever.base import BaseRetriever
 from haystack.document_stores.base import BaseDocumentStore
 from haystack.telemetry import send_event
-from haystack.utils.experiment_tracking import MLflowTrackingHead, Tracker as tracker
+from haystack.utils.experiment_tracking import Tracker as tracker
 
 
 logger = logging.getLogger(__name__)
@@ -55,7 +55,7 @@ logger = logging.getLogger(__name__)
 
 ROOT_NODE_TO_PIPELINE_NAME = {"query": "query", "file": "indexing"}
 CODE_GEN_DEFAULT_COMMENT = "This code has been generated."
-TRACKING_TOOL_TO_HEAD = {"mlflow": MLflowTrackingHead}
+# TRACKING_TOOL_TO_HEAD = {"mlflow": MLflowTrackingHead}
 
 
 class Pipeline:

@@ -24,6 +24,6 @@ from haystack.utils.experiment_tracking import (
     Tracker,
     NoTrackingHead,
     BaseTrackingHead,
-    MLflowTrackingHead,
+    # MLflowTrackingHead,
     StdoutTrackingHead,
 )
